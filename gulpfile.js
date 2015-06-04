@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var minifyCss = require('gulp-minify-css');
 var jsmin = require('gulp-jsmin');
+var gzip = require('gulp-gzip');
 // var rename = require('gulp-rename');
 
 gulp.task('js-min', function () {
@@ -16,4 +17,14 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['minify-css','js-min']);
+gulp.task('compress', function() {
+    gulp.src('js/*.js')
+    .pipe(gzip())
+    .pipe(gulp.dest('gzip'));
+});
+
+gulp.task('default', ['minify-css','js-min','compress']);
+
+
+
+ 
